@@ -1,0 +1,4 @@
+<!-- This is a placeholder for the profile image. Please replace this with the actual image file. -->
+<!-- Save your profile image as 'pari-profile.jpg' in the public/images/ folder -->
+<!-- The image should be cropped to focus on the upper body/headshot area -->
+
