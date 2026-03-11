@@ -114,8 +114,8 @@ const Contact = () => {
       title: 'Location',
       value: 'Mumbai, India',
       link: null,
-      color: 'text-purple-500',
-      bgColor: 'bg-purple-100 dark:bg-purple-900/20',
+      color: 'text-slate-400',
+      bgColor: 'bg-slate-200 dark:bg-slate-800',
     },
   ];
 
@@ -334,7 +334,7 @@ const Contact = () => {
                   >
                     {/* Animated background */}
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-primary-600 to-purple-600"
+                      className="absolute inset-0 bg-gradient-to-r from-slate-700 to-black"
                       initial={{ x: "-100%" }}
                       animate={{ x: isSubmitting ? "0%" : "-100%" }}
                       transition={{ duration: 0.6 }}
@@ -417,7 +417,7 @@ const Contact = () => {
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.8, y: -20 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
-                    className="p-6 bg-gradient-to-r from-red-100 to-pink-100 dark:from-red-900/20 dark:to-pink-900/20 border border-red-300 dark:border-red-700 rounded-xl shadow-lg"
+                    className="p-6 bg-gradient-to-r from-red-100 to-slate-100 dark:from-red-900/20 dark:to-slate-900/40 border border-red-300 dark:border-red-700 rounded-xl shadow-lg"
                   >
                     <div className="flex items-center justify-center space-x-3">
                       <motion.div
@@ -460,19 +460,6 @@ const Contact = () => {
           </motion.div>
         </div>
 
-        {/* Additional Info */}
-        <motion.div
-          variants={itemVariants}
-          className="text-center mt-16 p-8 bg-gradient-to-r from-primary-50 to-purple-50 dark:from-primary-900/20 dark:to-purple-900/20 rounded-2xl"
-        >
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-            Open to Opportunities
-          </h3>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            I'm currently looking for internships, freelance projects, and collaboration opportunities 
-            in data science, machine learning, and web development. Let's create something amazing together!
-          </p>
-        </motion.div>
       </motion.div>
     </section>
   );

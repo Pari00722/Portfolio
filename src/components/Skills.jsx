@@ -39,10 +39,10 @@ const Skills = () => {
           libraries: {
             title: 'Data Science Libraries',
             icon: BarChart3,
-            color: 'from-purple-500 to-purple-600',
-            bgColor: 'from-purple-500/10 to-purple-600/10',
-            borderColor: 'border-purple-500/20',
-            hoverColor: 'hover:border-purple-400/40',
+            color: 'from-slate-500 to-slate-700',
+            bgColor: 'from-slate-500/10 to-slate-700/10',
+            borderColor: 'border-slate-500/20',
+            hoverColor: 'hover:border-slate-400/40',
             skills: [
               { name: 'NumPy', proficiency: 90, level: 'Expert' },
               { name: 'Pandas', proficiency: 92, level: 'Expert' },

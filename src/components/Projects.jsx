@@ -96,7 +96,7 @@ const Projects = () => {
     const colors = {
       'Data Science': 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-300',
       'Machine Learning': 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300',
-      'Web Development': 'bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-300',
+      'Web Development': 'bg-slate-100 text-slate-800 dark:bg-slate-900/40 dark:text-slate-300',
       'Data Visualization': 'bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-300',
     };
     return colors[category] || 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-300';
@@ -120,10 +120,10 @@ const Projects = () => {
           {projects.map((project, index) => (
                 <div
                   key={project.id}
-                  className="card overflow-hidden group hover:transform hover:-translate-y-2 hover:scale-105 transition-all duration-300"
+                  className="overflow-hidden group hover:transform hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 rounded-3xl border border-indigo-400/20 bg-gradient-to-br from-[#0f1020] via-black to-[#111827] shadow-[0_18px_60px_rgba(0,0,0,0.45)]"
                 >
                   {/* Project Image */}
-                  <div className="relative h-48 bg-gradient-to-br from-primary-100 to-purple-100 dark:from-primary-900/20 dark:to-purple-900/20 overflow-hidden">
+                  <div className="relative h-48 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-900/60 dark:to-black overflow-hidden">
                     {project.image && project.image !== '/api/placeholder/400/250' ? (
                       <img
                         src={project.image}
@@ -137,14 +137,14 @@ const Projects = () => {
                       />
                     ) : null}
                     <div className={`absolute inset-0 flex items-center justify-center ${project.image && project.image !== '/api/placeholder/400/250' ? 'bg-black/20' : ''}`} style={{display: project.image && project.image !== '/api/placeholder/400/250' ? 'none' : 'flex'}}>
-                      <div className="w-24 h-24 bg-gradient-to-br from-primary-500 to-purple-500 rounded-full flex items-center justify-center">
+                      <div className="w-24 h-24 bg-gradient-to-br from-slate-700 to-black rounded-full flex items-center justify-center">
                         <Code className="w-12 h-12 text-white" />
                       </div>
                     </div>
                   </div>
 
                   {/* Project Content */}
-                  <div className="p-6">
+                  <div className="p-6 bg-gradient-to-b from-white/[0.03] to-transparent">
                     <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                       {project.title}
                     </h4>
@@ -170,7 +170,7 @@ const Projects = () => {
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 bg-gray-100 dark:bg-dark-700 text-gray-700 dark:text-gray-300 rounded-full text-sm"
+                          className="px-3 py-1 bg-indigo-200/10 border border-indigo-300/10 text-gray-200 rounded-full text-sm"
                         >
                           {tech}
                         </span>

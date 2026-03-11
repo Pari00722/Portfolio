@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ChevronDown, Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import FloatingLines from './FloatingLines';
 
 const Hero = () => {
   const scrollToSection = (sectionId) => {
@@ -32,25 +33,23 @@ const Hero = () => {
     },
   };
 
-  const iconVariants = {
-    hidden: { scale: 0, rotate: -180 },
-    visible: {
-      scale: 1,
-      rotate: 0,
-      transition: {
-        duration: 0.8,
-        ease: 'easeOut',
-      },
-    },
-  };
-
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-dark-900 dark:via-dark-800 dark:to-dark-900">
+    <section id="home" className="hero-story-shell min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-100 via-white to-slate-200 dark:from-black dark:via-black dark:to-black">
+      <FloatingLines
+        className="hero-story-lines"
+        lineCount={[3, 4, 3]}
+        lineDistance={[20, 14, 18]}
+        linesGradient={['#e947f5', '#7c83ff', '#4f7dff']}
+        animationSpeed={0.9}
+        interactive={false}
+        parallax={false}
+      />
+      <div className="hero-story-overlay"></div>
+
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5 dark:opacity-10">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-primary-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-2000"></div>
+      <div className="absolute inset-0 opacity-5 dark:opacity-8">
+        <div className="absolute top-20 left-20 w-72 h-72 bg-white rounded-full mix-blend-screen filter blur-3xl animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-72 h-72 bg-slate-400 rounded-full mix-blend-screen filter blur-3xl animate-pulse delay-1000"></div>
       </div>
 
       <motion.div
@@ -185,10 +184,10 @@ const Hero = () => {
             >
               <div className="relative">
                 <motion.div
-                  className="w-80 h-80 rounded-full overflow-hidden shadow-2xl border-4 border-white dark:border-dark-700"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                >
+                className="w-80 h-80 rounded-full overflow-hidden shadow-2xl border-4 border-white/80 dark:border-primary-400/20 hero-portrait-ring"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+              >
                   <img
                     src="/images/pari-portfolio.jgp.png"
                     alt="Pari - Aspiring Data Scientist"
@@ -200,7 +199,7 @@ const Hero = () => {
                     }}
                   />
                   {/* Fallback placeholder */}
-                  <div className="w-full h-full bg-gradient-to-br from-primary-500 to-purple-500 flex items-center justify-center text-white text-6xl font-bold" style={{display: 'none'}}>
+                  <div className="w-full h-full bg-gradient-to-br from-slate-800 to-black flex items-center justify-center text-white text-6xl font-bold" style={{display: 'none'}}>
                     P
                   </div>
                 </motion.div>

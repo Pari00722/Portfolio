@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 const Achievements = () => {
   const [selectedCertificate, setSelectedCertificate] = useState(null);
+  const [expandedCertificates, setExpandedCertificates] = useState({});
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -97,7 +98,7 @@ const Achievements = () => {
       Competition: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400',
       Academic: 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400',
       Professional: 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400',
-      Community: 'bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400',
+      Community: 'bg-slate-100 text-slate-800 dark:bg-slate-900/40 dark:text-slate-300',
       Certificate: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/20 dark:text-indigo-400',
     };
     return colors[category] || 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400';
@@ -111,6 +112,13 @@ const Achievements = () => {
 
   const closeModal = () => {
     setSelectedCertificate(null);
+  };
+
+  const toggleCertificateDetails = (title) => {
+    setExpandedCertificates((current) => ({
+      ...current,
+      [title]: !current[title],
+    }));
   };
 
   return (
@@ -139,7 +147,7 @@ const Achievements = () => {
               key={index}
               variants={cardVariants}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="bg-white dark:bg-dark-800 rounded-2xl p-8 shadow-xl border border-gray-200 dark:border-dark-700 hover:shadow-2xl transition-all duration-500 group"
+              className="rounded-3xl p-8 shadow-2xl border border-indigo-400/20 bg-gradient-to-br from-[#111226] via-black to-[#101827] hover:shadow-[0_24px_70px_rgba(0,0,0,0.5)] transition-all duration-500 group"
               data-aos="fade-up"
               data-aos-delay={index * 200}
             >
@@ -174,11 +182,11 @@ const Achievements = () => {
               {achievement.file && (
                 <div className="mb-6">
                   <div 
-                    className="relative bg-white rounded-lg overflow-hidden border border-gray-200 dark:border-dark-600 cursor-pointer group hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300"
+                    className="relative bg-white/5 rounded-lg overflow-hidden border border-white/10 cursor-pointer group hover:border-indigo-300/40 transition-all duration-300"
                     onClick={() => handleViewCertificate(achievement.file, achievement.title)}
                   >
                     {/* Certificate Preview */}
-                    <div className="relative h-64 bg-white">
+                    <div className="relative h-64 bg-black">
                       <img
                         src={achievement.preview}
                         alt={`${achievement.title} Certificate Preview`}
@@ -191,7 +199,7 @@ const Achievements = () => {
                       />
                       <div className="h-full flex items-center justify-center" style={{display: 'none'}}>
                         <div className="text-center p-6">
-                          <div className="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center">
+                          <div className="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-slate-100 to-slate-300 dark:from-slate-800 dark:to-black rounded-full flex items-center justify-center">
                             <FileText className="w-12 h-12 text-blue-600" />
                           </div>
                           <h4 className="text-lg font-semibold text-gray-800 mb-2">
@@ -220,7 +228,7 @@ const Achievements = () => {
                     Key Highlights:
                   </h4>
                   {achievement.title.includes('Elite') && (
-                    <div className="mb-4 p-3 bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
+                    <div className="mb-4 p-3 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-lg border border-yellow-400/20">
                       <div className="flex items-center space-x-2">
                         <div className="w-3 h-3 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full"></div>
                         <span className="text-sm font-semibold text-yellow-800 dark:text-yellow-300">
@@ -230,13 +238,25 @@ const Achievements = () => {
                     </div>
                   )}
                 <ul className="space-y-2">
-                  {achievement.details.map((detail, detailIndex) => (
+                  {(expandedCertificates[achievement.title]
+                    ? achievement.details
+                    : achievement.details.slice(0, 3)
+                  ).map((detail, detailIndex) => (
                     <li key={detailIndex} className="flex items-start space-x-3">
                       <div className={`w-2 h-2 bg-gradient-to-r ${achievement.color} rounded-full mt-2 flex-shrink-0`}></div>
                       <span className="text-gray-600 dark:text-gray-300 text-sm">{detail}</span>
                     </li>
                   ))}
                 </ul>
+                {achievement.details.length > 3 && (
+                  <button
+                    type="button"
+                    onClick={() => toggleCertificateDetails(achievement.title)}
+                    className="mt-4 text-sm font-semibold text-cyan-300 transition hover:text-cyan-200"
+                  >
+                    {expandedCertificates[achievement.title] ? 'Read less' : 'Read more'}
+                  </button>
+                )}
               </div>
 
               {/* Certificate Action Button */}
@@ -244,7 +264,7 @@ const Achievements = () => {
                 <div className="mt-6">
                   <motion.button
                     onClick={() => handleViewCertificate(achievement.file, achievement.title)}
-                    className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-gradient-to-r from-teal-500 to-blue-600 text-white rounded-lg hover:from-teal-600 hover:to-blue-700 transition-all duration-200 font-medium"
+                    className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white rounded-lg hover:from-indigo-400 hover:to-fuchsia-400 transition-all duration-200 font-medium"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -272,7 +292,7 @@ const Achievements = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="bg-white dark:bg-dark-800 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
+            className="bg-[#090910] rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden border border-white/10"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
@@ -282,7 +302,7 @@ const Achievements = () => {
               </h3>
               <button
                 onClick={closeModal}
-                className="p-2 hover:bg-gray-100 dark:hover:bg-dark-700 rounded-lg transition-colors duration-200"
+                className="p-2 hover:bg-white/5 rounded-lg transition-colors duration-200"
               >
                 <X className="w-6 h-6 text-gray-500 dark:text-gray-400" />
               </button>
@@ -293,7 +313,7 @@ const Achievements = () => {
               <div className="flex justify-center mb-6">
                 <motion.button
                   onClick={() => window.open(selectedCertificate.file, '_blank')}
-                  className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-teal-500 to-blue-600 text-white rounded-lg hover:from-teal-600 hover:to-blue-700 transition-all duration-200 font-medium"
+                  className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-indigo-500 to-fuchsia-500 text-white rounded-lg hover:from-indigo-400 hover:to-fuchsia-400 transition-all duration-200 font-medium"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -304,7 +324,7 @@ const Achievements = () => {
 
               {/* Certificate Preview */}
               <div className="mb-6">
-                <div className="relative bg-white rounded-lg overflow-hidden border border-gray-200 dark:border-dark-600">
+                <div className="relative bg-black rounded-lg overflow-hidden border border-white/10">
                   <img
                     src={selectedCertificate.file}
                     alt={`${selectedCertificate.title} Certificate`}
@@ -317,7 +337,7 @@ const Achievements = () => {
                   />
                   <div className="h-64 flex items-center justify-center" style={{display: 'none'}}>
                     <div className="text-center p-6">
-                      <div className="w-32 h-32 mx-auto mb-4 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center">
+                      <div className="w-32 h-32 mx-auto mb-4 bg-gradient-to-br from-slate-100 to-slate-300 dark:from-slate-800 dark:to-black rounded-full flex items-center justify-center">
                         <FileText className="w-16 h-16 text-blue-600" />
                       </div>
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">

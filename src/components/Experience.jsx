@@ -76,10 +76,10 @@ const Experience = () => {
         {/* Experience Timeline */}
         <div className="max-w-6xl mx-auto relative">
           {/* Timeline Line positioned at 1/3 from left */}
-          <div className="hidden md:block absolute left-1/3 w-1 h-full bg-gradient-to-b from-primary-500 via-purple-500 to-primary-500"></div>
+          <div className="hidden md:block absolute left-1/3 w-1 h-full bg-gradient-to-b from-slate-500 via-sky-500 to-slate-700"></div>
           
           {/* Mobile Timeline Line */}
-          <div className="md:hidden absolute left-8 w-0.5 h-full bg-gradient-to-b from-primary-500 via-purple-500 to-primary-500"></div>
+          <div className="md:hidden absolute left-8 w-0.5 h-full bg-gradient-to-b from-slate-500 via-sky-500 to-slate-700"></div>
           
           {experienceData.map((experience, index) => (
             <motion.div
@@ -90,7 +90,7 @@ const Experience = () => {
               data-aos-delay={index * 200}
             >
               {/* Timeline Icon */}
-              <div className="absolute md:relative top-8 md:top-0 w-16 h-16 bg-gradient-to-br from-primary-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg z-10 md:ml-8 left-0">
+              <div className="absolute md:relative top-8 md:top-0 w-16 h-16 bg-gradient-to-br from-slate-700 to-black rounded-full flex items-center justify-center shadow-lg z-10 md:ml-8 left-0">
                 <Briefcase className="w-8 h-8 text-white" />
               </div>
 
@@ -120,7 +120,7 @@ const Experience = () => {
                         </div>
                       </div>
                       {/* Type Badge */}
-                      <span className="inline-block px-3 py-1 bg-purple-100 dark:bg-purple-900/20 text-purple-800 dark:text-purple-300 rounded-full text-sm font-medium border border-purple-200 dark:border-purple-700">
+                      <span className="inline-block px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-full text-sm font-medium border border-slate-200 dark:border-slate-700">
                         {experience.type}
                       </span>
                     </div>
